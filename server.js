@@ -1,96 +1,124 @@
-const express = require('express');
-const app = express();
-const port = process.env.PORT || 3000;
+res.send(`
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Happy Birthday 💖</title>
 
-app.get('/', (req, res) => {
-  res.send(`
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <title>Happy Birthday 🎉</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        color: white;
-        overflow: hidden;
-      }
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
 
-      h1 {
-        font-size: 50px;
-        margin-top: 80px;
-      }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      background: black;
+    }
 
-      p {
-        font-size: 22px;
-      }
+    /* Video Background */
+    video {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      z-index: -1;
+      filter: brightness(0.5);
+    }
 
-      .balloons {
-        font-size: 40px;
-        margin-top: 20px;
-        animation: float 3s infinite ease-in-out;
-      }
+    .container {
+      margin-top: 120px;
+      animation: fadeIn 2s ease-in-out;
+    }
 
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-25px); }
-        100% { transform: translateY(0px); }
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-      .btn {
-        margin-top: 30px;
-        padding: 15px 25px;
-        font-size: 18px;
-        background: white;
-        color: #ff6f91;
-        border: none;
-        border-radius: 25px;
-        cursor: pointer;
-      }
+    h1 {
+      font-size: 55px;
+    }
 
-      .message {
-        margin-top: 20px;
-        font-size: 24px;
-        display: none;
-      }
-    </style>
-  </head>
+    .typing {
+      font-size: 24px;
+      margin-top: 20px;
+      min-height: 40px;
+    }
 
-  <body>
-    <h1>🎉 Advance Happy Birthday Spandana 🎂</h1>
+    .btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      border: none;
+      background: #ff6f91;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-    <p>
-      Wishing you a day full of happiness and a year full of joy ❤️
-    </p>
+    .btn:hover {
+      transform: scale(1.1);
+    }
 
-    <div class="balloons">🎈🎈🎈🎈🎈</div>
+    .message {
+      margin-top: 30px;
+      font-size: 26px;
+      display: none;
+    }
+  </style>
+</head>
 
-    <button class="btn" onclick="showMessage()">Click for Surprise 🎁</button>
+<body>
+
+  <!-- Background Video -->
+  <video autoplay muted loop>
+    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    <h1>🎉 Happy Birthday Spandana 💖</h1>
+
+    <div class="typing" id="typing"></div>
+
+    <button class="btn" onclick="showMessage()">Open Your Surprise 🎁</button>
 
     <div class="message" id="msg">
-      You are truly special 💖<br/>
-      Keep smiling always 😊
+      You are one of the most special people in my life 💖<br/>
+      Your smile means everything 😊<br/><br/>
+      I made this just to see you smile today 🎉
     </div>
+  </div>
 
-    <!-- Music -->
-    <audio autoplay loop>
-      <source src="https://www.bensound.com/bensound-music/bensound-happyrock.mp3" type="audio/mpeg">
-    </audio>
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <script>
-      function showMessage() {
-        document.getElementById('msg').style.display = 'block';
+  <script>
+    // Typing text
+    const text = "Today is all about you 💖✨";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
       }
-    </script>
+    }
+    typeWriter();
 
-  </body>
-  </html>
-  `);
-});
+    // Surprise
+    function showMessage() {
+      document.getElementById('msg').style.display = 'block';
 
-app.listen(port, '0.0.0.0', () => {
-  console.log("App running on http://localhost:" + port);
-});
+      confetti({
+        particleCount: 200,
+        spread: 120
+      });
+    }
+  </script>
+
+</body>
+</html>
+`);
