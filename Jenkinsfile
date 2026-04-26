@@ -19,7 +19,7 @@ pipeline {
         }
         stage ('Build Doker Image'){
             steps{
-           sh 'docker build -t my-node-app:latest .'
+           sh 'docker build --no-cache -t my-node-app:latest .'
             }
         }
         stage('Run Container') {
