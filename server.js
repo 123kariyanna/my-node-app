@@ -1,4 +1,11 @@
-res.send(`
+const express = require('express');
+const app = express();
+
+const PORT = 3000;
+
+// Route
+app.get('/', (req, res) => {
+  res.send(`
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +23,6 @@ res.send(`
       background: black;
     }
 
-    /* Video Background */
     video {
       position: fixed;
       right: 0;
@@ -73,7 +79,6 @@ res.send(`
 
 <body>
 
-  <!-- Background Video -->
   <video autoplay muted loop>
     <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
   </video>
@@ -92,13 +97,12 @@ res.send(`
     </div>
   </div>
 
-  <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
-    // Typing text
     const text = "Today is all about you 💖✨";
     let i = 0;
+
     function typeWriter() {
       if (i < text.length) {
         document.getElementById("typing").innerHTML += text.charAt(i);
@@ -106,9 +110,9 @@ res.send(`
         setTimeout(typeWriter, 60);
       }
     }
+
     typeWriter();
 
-    // Surprise
     function showMessage() {
       document.getElementById('msg').style.display = 'block';
 
@@ -121,4 +125,10 @@ res.send(`
 
 </body>
 </html>
-`);
+  `);
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
