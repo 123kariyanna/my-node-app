@@ -80,7 +80,7 @@ app.get('/', (req, res) => {
 <body>
 
   <video autoplay muted loop>
-    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+    <source src="https://cdn.coverr.co/videos/coverr-mountain-landscape-1606/1080p.mp4" type="video/mp4" type="video/mp4">
   </video>
 
   <div class="container">
